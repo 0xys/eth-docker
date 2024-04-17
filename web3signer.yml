@@ -45,6 +45,7 @@ services:
       - metrics.path=/metrics
       - metrics.port=9001
       - metrics.instance=web3signer
+    network_mode: "host"
 
   postgres:
     restart: "unless-stopped"
@@ -60,6 +61,7 @@ services:
       timeout: 5s
     volumes:
       - web3signer-slashing-data:/var/lib/postgresql/data/
+    network_mode: "host"
 
 volumes:
   web3signer-keys:
