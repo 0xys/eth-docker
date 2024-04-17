@@ -77,7 +77,6 @@ services:
       - metrics.path=/metrics
       - metrics.port=8009
       - metrics.instance=validator
-    network_mode: "host"
 
   validator-exit:
     profiles: ["tools"]
