@@ -84,7 +84,6 @@ services:
   proxy:
     restart: "unless-stopped"
     image: prysm-proxy:local
-    user: nginxproxy
     build: 
       context: ./proxy
       args:

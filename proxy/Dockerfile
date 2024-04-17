@@ -2,22 +2,7 @@ FROM nginx:1.25
 
 COPY nginx-default.conf.template /etc/nginx/conf.d/default.conf.template
 
-ARG USER=nginxproxy
-ARG UID=10003
+COPY docker-entrypoint.sh /usr/local/bin/
 
-USER root
-
-RUN adduser \
-    --disabled-password \
-    --gecos "" \
-    --home "/nonexistent" \
-    --shell "/sbin/nologin" \
-    --no-create-home \
-    --uid "${UID}" \
-    "${USER}"
-
-COPY --chown=${USER}:${USER} docker-entrypoint.sh /usr/local/bin/
-USER ${USER}
-
-ENTRYPOINT ["/docker-entrypoint.sh"]
+ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
 CMD ["nginx", "-g", "daemon off;"]
