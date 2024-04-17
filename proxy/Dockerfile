@@ -3,9 +3,7 @@ FROM nginx:1.25
 COPY nginx-default.conf.template /etc/nginx/conf.d/default.conf.template
 
 ARG USER=nginxproxy
-
-USER ${USER}
-ARG UID=20002
+ARG UID=10003
 
 USER root
 
