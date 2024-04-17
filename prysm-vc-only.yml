@@ -90,7 +90,7 @@ services:
         - REMOTE_BEACON_NODE_URL=${REMOTE_CL_NODE:-http://consensus:4000}
         - REMOTE_API_KEY=${REMOTE_CL_API_KEY}
     ports:
-      - "80:80"
+      - "8080:8080"
     networks: 
       default:
         aliases:
