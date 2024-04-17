@@ -7,6 +7,8 @@ ARG USER=nginxproxy
 USER ${USER}
 ARG UID=20002
 
+USER root
+
 RUN adduser \
     --disabled-password \
     --gecos "" \
@@ -17,5 +19,7 @@ RUN adduser \
     "${USER}"
 
 COPY --chown=${USER}:${USER} docker-entrypoint.sh /usr/local/bin/
+USER ${USER}
+
 ENTRYPOINT ["/docker-entrypoint.sh"]
 CMD ["nginx", "-g", "daemon off;"]
