@@ -59,13 +59,14 @@ services:
       - --monitoring-port
       - "8009"
       - --web
-      - --grpc-gateway-host
-      - 0.0.0.0
-      - --grpc-gateway-port
-      - ${KEY_API_PORT:-7500}
-      - --grpc-gateway-corsdomain=*
-      - --beacon-rpc-gateway-provider
-      - consensus:5052
+      # - --grpc-gateway-host
+      # - 0.0.0.0
+      # - --grpc-gateway-port
+      # - ${KEY_API_PORT:-7500}
+      # - --grpc-gateway-corsdomain=*
+      - --enable-beacon-rest-api
+      - --beacon-rest-api-provider
+      - ${CL_NODE:-http://consensus:4000}
       - --suggested-fee-recipient
       - ${FEE_RECIPIENT}
       - --wallet-password-file
@@ -90,8 +91,6 @@ services:
     environment:
       - REMOTE_BEACON_NODE_URL=${REMOTE_CL_NODE:-http://consensus:4000}
       - REMOTE_API_KEY=${REMOTE_CL_API_KEY}
-    ports:
-      - "4443:443"
     networks: 
       default:
         aliases:
