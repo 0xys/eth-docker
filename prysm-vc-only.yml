@@ -83,14 +83,15 @@ services:
 
   proxy:
     restart: "unless-stopped"
-    image: prysm-proxy:local
-    build: 
-      context: ./proxy
-      args:
-        - REMOTE_BEACON_NODE_URL=${REMOTE_CL_NODE:-http://consensus:4000}
-        - REMOTE_API_KEY=${REMOTE_CL_API_KEY}
+    image: nginx
+    volumes:
+      - ./proxy/templates:/etc/nginx/templates
+      - ./proxy/ssl:/etc/nginx/ssl
+    environment:
+      - REMOTE_BEACON_NODE_URL=${REMOTE_CL_NODE:-http://consensus:4000}
+      - REMOTE_API_KEY=${REMOTE_CL_API_KEY}
     ports:
-      - "8080:8080"
+      - "4443:443"
     networks: 
       default:
         aliases:

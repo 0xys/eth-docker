@@ -1,0 +1,22 @@
+include       mime.types;
+
+server {
+    listen 8080 http2;
+    # listen 443 ssl http2;
+    # listen 4443 ssl http2;
+
+    server_name _;
+
+    # ssl_certificate     /etc/nginx/ssl/server.crt;
+    # ssl_certificate_key /etc/nginx/ssl/server.key;
+
+    location / {
+        proxy_pass https://${REMOTE_BEACON_NODE_URL};
+        proxy_set_header Host '${REMOTE_BEACON_NODE_URL}';
+        proxy_set_header x-goog-api-key ${REMOTE_API_KEY};
+
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+}
