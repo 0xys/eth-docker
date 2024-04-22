@@ -50,7 +50,6 @@ services:
       - --validator-keys=/var/lib/teku/validator-keys:/var/lib/teku/validator-passwords
       - --validators-early-attestations-enabled=false
       - --validator-api-enabled=true
-      - --rest-api-enabled
       - --validator-api-interface=0.0.0.0
       - --validator-api-port=${KEY_API_PORT:-7500}
       - --validator-api-host-allowlist=*
@@ -68,20 +67,6 @@ services:
       - metrics.path=/metrics
       - metrics.port=8009
       - metrics.instance=validator
-
-  proxy:
-    restart: "unless-stopped"
-    image: nginx
-    volumes:
-      - ./proxy/templates:/etc/nginx/templates
-      - ./proxy/ssl:/etc/nginx/ssl
-    environment:
-      - REMOTE_BEACON_NODE_URL=${REMOTE_CL_NODE:-http://consensus:4000}
-      - REMOTE_API_KEY=${REMOTE_CL_API_KEY}
-    networks: 
-      default:
-        aliases:
-          - vc
 
   validator-exit:
     profiles: ["tools"]
