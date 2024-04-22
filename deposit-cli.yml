@@ -56,3 +56,22 @@ services:
       - generate-bls-to-execution-change
       - --chain
       - ${NETWORK}
+  deposit-cli-web3signer-deposit:
+    profiles: ["tools"]
+    restart: "no"
+    build:
+      context: ./staking-deposit-cli
+      args:
+        - BUILD_TARGET=${DEPCLI_SRC_BUILD_TARGET:-'$(git describe --tags $(git rev-list --tags --max-count=1))'}
+        - SRC_REPO=${DEPCLI_SRC_REPO:-https://github.com/ethereum/staking-deposit-cli}
+    image: staking-deposit-cli:local
+    pull_policy: never
+    volumes:
+      - ./.eth:/app/.eth/
+    entrypoint:
+      - docker-entrypoint.sh
+      - python3
+      - /app/staking_deposit/deposit.py
+      - web3signer-deposit
+      - --chain
+      - ${NETWORK}
