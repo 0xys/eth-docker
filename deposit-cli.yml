@@ -75,3 +75,5 @@ services:
       - web3signer-deposit
       - --chain
       - ${NETWORK}
+      - withdrawal_addr
+      - ${FEE_RECIPIENT}
