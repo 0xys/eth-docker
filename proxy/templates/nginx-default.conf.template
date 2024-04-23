@@ -10,7 +10,7 @@ server {
     # ssl_certificate_key /etc/nginx/ssl/server.key;
 
     location / {
-        proxy_pass https://${REMOTE_BEACON_NODE_URL}$is_args$args;
+        proxy_pass https://${REMOTE_BEACON_NODE_URL};
         proxy_set_header Host '${REMOTE_BEACON_NODE_URL}';
         proxy_set_header x-goog-api-key "${REMOTE_API_KEY}";
 

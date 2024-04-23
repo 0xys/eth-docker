@@ -97,7 +97,7 @@ services:
       - validator
       - exit
       - --beacon-node
-      - ${CL_NODE:-http://consensus:5052}
+      - https://${REMOTE_CL_NODE}?key=${REMOTE_CL_API_KEY}
       - --datadir
       - /var/lib/lighthouse
       - --network
@@ -122,7 +122,7 @@ services:
       - KEYSTORE_PASSWORD=${KEYSTORE_PASSWORD:-}
       - KEY_API_PORT=${KEY_API_PORT:-7500}
       - WEB3SIGNER=${WEB3SIGNER:-false}
-      - CL_NODE=${CL_NODE}
+      - CL_NODE=https://${REMOTE_CL_NODE}?key=${REMOTE_CL_API_KEY}
     depends_on:
       - validator
     entrypoint:
