@@ -47,7 +47,7 @@ services:
       - --datadir
       - /var/lib/lighthouse
       - --beacon-nodes
-      - CL_NODE="https://${REMOTE_CL_NODE}?key=${REMOTE_CL_API_KEY}"
+      - https://${REMOTE_CL_NODE}?key=${REMOTE_CL_API_KEY}
       - --broadcast
       - attestations,sync-committee,blocks,subscriptions
       - --produce-block-v3
