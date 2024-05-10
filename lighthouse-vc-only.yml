@@ -66,6 +66,8 @@ services:
       - --unencrypted-http-transport
       - --suggested-fee-recipient
       - ${FEE_RECIPIENT}
+      - --builder-boost-factor # to mitigate known issues https://github.com/sigp/lighthouse/releases/tag/v4.6.0
+      - 100
     labels:
       - traefik.enable=true
       - traefik.http.routers.${VC_HOST:-vc}.service=${VC_HOST:-vc}
