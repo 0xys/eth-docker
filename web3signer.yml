@@ -51,6 +51,7 @@ services:
   postgres:
     restart: "unless-stopped"
     image: "postgres:${PG_DOCKER_TAG}"
+    command: -c config_file=/etc/postgresql/postgresql.conf
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
@@ -62,6 +63,7 @@ services:
       timeout: 5s
     volumes:
       - web3signer-slashing-data:/var/lib/postgresql/data/
+      - ./web3signer/postgresql.conf:/etc/postgresql/postgresql.conf
 
 volumes:
   web3signer-keys:
