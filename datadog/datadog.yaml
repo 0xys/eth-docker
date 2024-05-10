@@ -1,0 +1,8 @@
+logs_enabled: true
+log_level: DEBUG
+
+listeners:
+  - name: docker
+
+tags:
+  - service: ethd
