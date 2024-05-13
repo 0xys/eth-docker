@@ -35,6 +35,9 @@ services:
       - eth2
       - --network=${NETWORK}
       - --enable-key-manager-api=true
+      - --gcp-secrets-enabled=true
+      - --gcp-project-id=${GCP_PROJECT_ID}
+      - --gcp-secrets-filter=labels.type=${VALIDATOR_KEY_LABEL}
       - --slashing-protection-db-url=jdbc:postgresql://postgres/web3signer
       - --slashing-protection-db-username=postgres
       - --slashing-protection-db-password=postgres

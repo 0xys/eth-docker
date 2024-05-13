@@ -42,6 +42,8 @@ if [[ "$*" =~ "generate-bls-to-execution-change" ]]; then
   cp -rp /app/bls_to_execution_changes /app/.eth/
   chown -R "$uid":"$uid" /app/.eth/bls_to_execution_changes
   echo "The change files have been copied to ./.eth/bls_to_execution_changes"
+elif [[ "$*" =~ "web3signer-deposit" ]]; then
+  echo 'done'
 else
   mkdir -p /app/.eth/"$folder"
   cp -p /app/validator_keys/* /app/.eth/"$folder"/

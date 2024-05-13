@@ -59,14 +59,13 @@ services:
       - --monitoring-port
       - "8009"
       - --web
-      # - --grpc-gateway-host
-      # - 0.0.0.0
-      # - --grpc-gateway-port
-      # - ${KEY_API_PORT:-7500}
-      # - --grpc-gateway-corsdomain=*
-      - --enable-beacon-rest-api
-      - --beacon-rest-api-provider
-      - ${CL_NODE:-http://consensus:4000}
+      - --grpc-gateway-host
+      - 0.0.0.0
+      - --grpc-gateway-port
+      - ${KEY_API_PORT:-7500}
+      - --grpc-gateway-corsdomain=*
+      - --beacon-rpc-gateway-provider
+      - consensus:5052
       - --suggested-fee-recipient
       - ${FEE_RECIPIENT}
       - --wallet-password-file
@@ -81,20 +80,6 @@ services:
       - metrics.path=/metrics
       - metrics.port=8009
       - metrics.instance=validator
-
-  proxy:
-    restart: "unless-stopped"
-    image: nginx
-    volumes:
-      - ./proxy/templates:/etc/nginx/templates
-      - ./proxy/ssl:/etc/nginx/ssl
-    environment:
-      - REMOTE_BEACON_NODE_URL=${REMOTE_CL_NODE:-http://consensus:4000}
-      - REMOTE_API_KEY=${REMOTE_CL_API_KEY}
-    networks: 
-      default:
-        aliases:
-          - vc
 
   create-wallet:
     profiles: ["tools"]
